@@ -22,4 +22,5 @@
 
 -   [VueJS Course01](https://www.youtube.com/watch?v=Wy9q22isx3U) -> Vue este un framework pentru JavaScript, ce ofera functionalitati noi si un mod de lucru mai simplu
 -   [VueJS Course02](https://www.youtube.com/watch?v=4deVCNJq3qc&t=9208s)
+-   [VueJS Official Documentation](https://vuejs.org/v2/guide/) -> Spre deosebire de multe documentatiilor de pe net, asta chiar e facuta bine
 -   [Vuex](https://www.youtube.com/watch?v=5lVQgZzLMHc&t=2029s) -> Vuex este practic un fel de plugin pentru VueJS, care permite realizarea acelor fisiere din /store, pentru a putea folosi anumite variabile si functii in mai multe pagini(ex: vrem sa stim ce user este autentificat in toate paginile, nu are sens sa facem o functie identica getUser in fiecare pagina. Prin realizarea store/modules/auth.js, avem un Store pentru autentificare, unde avem toata logica de logare, inregistrare, ce o folosim pe toate paginile)
