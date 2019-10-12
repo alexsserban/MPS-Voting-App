@@ -6,7 +6,7 @@
 -   Firebase -> Database -> Selectare de sus "Cloud Firestore", nu "Real Time Database", daca va intreaba de rules, puteti sa ii dati read, write oricui. Trebuie sa va faceti voi manual din Firestore colectiile "contests" si "users", nu trebuie sa aiba niciun document, se realizeaza automat din aplicatie
 -   Firebase -> Authentification -> Sign-In Method -> Enable la Google si Email/ Password
 -   Instalare pe pc nodeJS si yarn (cautati pe google)
--   Din terminal in folderul principal al proiectului, rulati "yarn" pentru instalare dependencies, trebuie decat o singura data la inceput, apoi pentru rularea serverului -> "yarn serve", dupa ce se initializeaza o sa va apara adresa in terminal.
+-   Din terminal in folderul principal al proiectului, rulati "yarn" pentru instalare dependencies, trebuie decat o singura data la inceput, apoi pentru rularea serverului -> "yarn serve", dupa ce se initializeaza o sa va apara adresa in terminal. Warnings-urile nu sunt o problema.
 
 # Prezentare proiect
 
