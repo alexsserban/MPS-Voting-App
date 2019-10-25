@@ -14,7 +14,10 @@ export default {
         }
     },
     actions: {
-        registerUserWithEmailAndPassword({dispatch}, {email, name, password}) {
+        registerUserWithEmailAndPassword(
+            {dispatch},
+            {email, name, password, role}
+        ) {
             return firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, password)
@@ -26,7 +29,8 @@ export default {
                             {
                                 id: ref.user.uid,
                                 email,
-                                name
+                                name,
+                                role
                             },
                             {root: true}
                         );
@@ -40,13 +44,13 @@ export default {
             return firebase.auth().signInWithEmailAndPassword(email, password);
         },
 
-        signInWithGoogle({dispatch}) {
+        signInWithGoogle({dispatch}, role) {
             const provider = new firebase.auth.GoogleAuthProvider();
             return firebase
                 .auth()
                 .signInWithPopup(provider)
                 .then(data => {
-                    const user = data.user;
+                    const user = {...data.user, role};
                     db.collection('users')
                         .doc(user.uid)
                         .get()
@@ -59,6 +63,7 @@ export default {
                                         name: user.displayName,
                                         email: user.email,
                                         username: user.email,
+                                        role: user.role,
                                         avatar: user.photoURL
                                     },
                                     {root: true}

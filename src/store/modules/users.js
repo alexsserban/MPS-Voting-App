@@ -11,14 +11,16 @@ export default {
     actions: {
         createUser(
             {state, commit},
-            {id, email, name, username, avatar = null}
+            {id, email, name, username, role, avatar = null}
         ) {
             return new Promise((resolve, reject) => {
                 email = email.toLowerCase();
                 const user = {
                     email,
-                    name
+                    name,
+                    role
                 };
+                console.log(user);
 
                 console.log('New User id: ', id);
 

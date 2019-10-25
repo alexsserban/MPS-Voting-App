@@ -5,6 +5,33 @@
         <div class="card bg-secondary shadow border-0">
           <div class="card-header bg-transparent pb-5">
             <div class="text-muted text-center mt-2 mb-4">
+              <small>What do you wanna be?</small>
+            </div>
+            <div class="text-center">
+              <form>
+                <label class="radio-inline">
+                  <input
+                    class="custom-radio"
+                    v-model="form.role"
+                    value="judge"
+                    type="radio"
+                    name="type"
+                  />Judge
+                </label>
+                <label class="radio-inline">
+                  <input
+                    class="custom-radio"
+                    v-model="form.role"
+                    value="organizer"
+                    type="radio"
+                    name="type"
+                  />Organizer
+                </label>
+              </form>
+            </div>
+          </div>
+          <div class="card-header bg-transparent pb-5">
+            <div class="text-muted text-center mt-2 mb-4">
               <small>Sign up with</small>
             </div>
             <div class="text-center">
@@ -20,7 +47,7 @@
             <div class="text-center text-muted mb-4">
               <small>Or sign up with credentials</small>
             </div>
-            <form @submit.prevent="register()" role="form">
+            <form @submit.prevent="register()">
               <div class="form-group">
                 <div class="input-group input-group-alternative mb-3">
                   <input
@@ -97,7 +124,8 @@ export default {
       form: {
         name: null,
         email: null,
-        password: null
+        password: null,
+        role: "judge"
       }
     };
   },
@@ -130,7 +158,7 @@ export default {
     },
 
     registerWithGoogle() {
-      this.$store.dispatch("auth/signInWithGoogle").then(() => {
+      this.$store.dispatch("auth/signInWithGoogle", this.form.role).then(() => {
         this.$router.push("/");
       });
     }
@@ -145,5 +173,13 @@ export default {
 <style>
 p {
   text-align: left;
+}
+
+.radio-inline {
+  margin-right: 20px;
+}
+
+.custom-radio {
+  margin-right: 5px;
 }
 </style>

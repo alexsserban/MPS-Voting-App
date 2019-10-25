@@ -1,45 +1,63 @@
 <template>
   <div v-if="asyncDataStatus_ready">
-    <h1>{{ contest.name }}</h1>
+    <h1>
+      {{ contest.name }}
+      <span v-if="!isStarted && !isFinished && !isPaused">will start soon</span>
+      <span v-else-if="isPaused">- next Stage will start soon</span>
 
-    <div class="row justify-content-center">
-      <div class="col-lg-6 col-md-8">
-        <div class="card bg-secondary shadow border-0">
-          <div class="card-body px-lg-5 py-lg-5">
-            <p>{{contest.rating ? `Team X rating: ${contest.rating}` : "No rating for Team X"}}</p>
+      <span v-else-if="isStarted">- voting time</span>
+      <span v-else>is finished!</span>
+    </h1>
+    <div class="row">
+      <div :class="[isOrganizer && !isStarted && !isFinished ? 'col-lg-1' : 'col-lg-2']"></div>
 
-            <label>Select Rating:</label>
-            <form class="ratingForm" @submit.prevent="updateRating()" role="form">
-              <select v-model="rating" name="cars">
-                <option value="2">2</option>
-                <option value="4">4</option>
-                <option value="6">6</option>
-                <option value="8">8</option>
-                <option value="10">10</option>
-              </select>
-              <br />
-              <br />
-              <button type="submit" class="btn btn-primary">Send Rating</button>
-            </form>
-          </div>
-        </div>
+      <div class="col-lg-8">
+        <ContestClassicBracket v-if="!isStarted" :contestId="id" />
+        <ContestClassicVotingStage v-else :contestId="id" :stageId="contest.currentStage" />
+        <br />
+
+        <button
+          v-if="isOrganizer && !isStarted && !isFinished && !isPaused"
+          class="btn btn-primary"
+          @click="start()"
+        >Start Contest</button>
+
+        <button
+          v-else-if="isOrganizer && isPaused && !isFinished"
+          class="btn btn-primary"
+          @click="start()"
+        >Start next Stage</button>
+
+        <br />
       </div>
+      <div v-if="!isStarted && isOrganizer && !isFinished" class="col-lg-2">
+        <RemovePlayer :contestId="id" :stageId="contest.currentStage" />
+      </div>
+
+      <div :class="[isOrganizer? 'col-lg-1' : 'col-lg-2']"></div>
     </div>
-    <br />
   </div>
 </template>
 
 <script>
 import asyncDataStatus from "@/mixins/asyncDataStatus";
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapState, mapActions, mapMutations } from "vuex";
 import { db } from "@/main";
+import ContestClassicBracket from "@/components/ContestClassicBracket.vue";
+import ContestClassicVotingStage from "@/components/ContestClassicVotingStage.vue";
+import RemovePlayer from "@/components/RemovePlayer.vue";
 
 export default {
   name: "PageContest",
 
   mixins: [asyncDataStatus],
 
-  // id-ul contest-ului din db
+  components: {
+    ContestClassicBracket,
+    ContestClassicVotingStage,
+    RemovePlayer
+  },
+
   props: {
     id: {
       required: true,
@@ -49,35 +67,55 @@ export default {
 
   data() {
     return {
-      rating: null
+      newPlayer: null
     };
   },
 
   computed: {
     ...mapState({
-      contestsList(state) {
-        return state.contests.items;
+      contest(state) {
+        return state.contests.items[this.id];
       }
     }),
 
-    contest() {
-      return this.contestsList[this.id];
+    ...mapGetters({
+      user: "auth/authUser"
+    }),
+
+    isOrganizer() {
+      return this.user.role == "organizer";
+    },
+
+    isStarted() {
+      return this.contest.status == "started";
+    },
+
+    isFinished() {
+      return this.contest.status == "finished";
+    },
+
+    isPaused() {
+      return this.contest.status == "paused";
     }
   },
 
   methods: {
-    ...mapActions("contests", ["fetchContest"]),
+    ...mapActions("contests", ["fetchContest", "fetchContestRealTime"]),
 
-    updateRating() {
+    start() {
       db.collection("contests")
         .doc(this.id)
-        .update({ rating: this.rating });
+        .update({
+          status: "started"
+        });
     }
   },
 
   created() {
-    this.fetchContest(this.id);
-    this.asyncDataStatus_fetched();
+    this.fetchContest(this.id).then(() => {
+      this.asyncDataStatus_fetched();
+      this.fetchContestRealTime(this.id);
+    });
   }
 };
 </script>

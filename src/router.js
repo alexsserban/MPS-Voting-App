@@ -23,6 +23,7 @@ const router = new Router({
             path: '/contest/:id',
             name: 'Contest',
             component: Contest,
+            meta: {requiresAuth: true},
             props: true
         },
 

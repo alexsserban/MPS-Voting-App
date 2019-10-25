@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import auth from './modules/auth';
 import users from './modules/users';
 import contests from './modules/contests';
+import stages from './modules/stages';
 import {db} from '@/main';
 
 Vue.use(Vuex);
@@ -63,6 +64,7 @@ export default new Vuex.Store({
     modules: {
         auth,
         users,
-        contests
+        contests,
+        stages
     }
 });

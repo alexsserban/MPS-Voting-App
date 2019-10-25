@@ -13,7 +13,7 @@
     <br />
 
     <!-- Daca exista un user logat, sa apara pe pagina si modulul de ContestCreator -->
-    <ContestCreator v-if="user" />
+    <ContestCreator v-if="isOrganizer" />
   </div>
 </template>
 
@@ -52,7 +52,12 @@ export default {
         if (Object.keys(this.contestsList).length != 0) return true;
         return false;
       }
-    })
+    }),
+
+    isOrganizer() {
+      if (!this.user) return false;
+      return this.user.role == "organizer";
+    }
   },
 
   methods: {
