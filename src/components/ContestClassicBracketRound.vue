@@ -6,13 +6,13 @@
         style="margin-left: .5rem"
         class="btn btn-primary"
         v-bind:class="[isStarted ? firstPlayerWon ?  'win'  : isDisqualified(firstPlayer.name) ? 'disqualified' : 'lose' : '']"
-      >{{ firstPlayer == 'undefined' ? '-' : firstPlayer.name}}</button>
+      >{{ firstPlayer.name}}</button>
       <label class="form-control-label">vs</label>
       <button
         style="margin: 0 .5rem 0 .5rem; "
         class="btn btn-primary my-4"
         v-bind:class="[isStarted ?  firstPlayerWon ?  isDisqualified(secondPlayer.name) ? 'disqualified' : 'lose' : 'win' : '']"
-      >{{ secondPlayer == 'undefined' ? '-' : secondPlayer.name}}</button>
+      >{{ secondPlayer.name == 'undefined' ? '-' : secondPlayer.name}}</button>
       <label class="form-control-label">{{ score(secondPlayer)}}</label>
     </div>
     <div>
@@ -44,13 +44,15 @@ export default {
     roundId: {
       required: true,
       type: String
-    },
+    }
   },
 
   computed: {
     ...mapState({
       round(state) {
-        return state.contests.items[this.contestId].stages[this.stageId][this.roundId];
+        return state.contests.items[this.contestId].stages[this.stageId][
+          this.roundId
+        ];
       }
     }),
 

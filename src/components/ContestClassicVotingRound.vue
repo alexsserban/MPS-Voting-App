@@ -92,8 +92,7 @@ export default {
         contestId: this.contestId,
         stageId: this.stageId,
         roundId: this.roundId,
-        firstPlayer: this.firstPlayer,
-        secondPlayer: this.secondPlayer,
+        players: [this.firstPlayer, this.secondPlayer],
         benchmarks: this.benchmarks
       });
     }

@@ -67,8 +67,9 @@ export default {
 
   // in momentul in care pagina este creata, foloseste functia pentru a extrage toate contesturile din db si apoi anunta aplicatia ca pagina poate fi randata
   // fara this.asyncDataStatus_fetched() pe pagina ar ramane acel loader la infinit si nu ar aparea nimic
-  created() {
-    this.fetchAllContests().then(() => this.asyncDataStatus_fetched());
+  async created() {
+    await this.fetchAllContests();
+    this.asyncDataStatus_fetched();
   }
 };
 </script>
