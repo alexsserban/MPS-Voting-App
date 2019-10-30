@@ -228,16 +228,15 @@ export default {
             {commit, state},
             {playerName, opponentName, contestId, stageId, roundId}
         ) {
+            let updates = {},
+                roundPath = `stages.${stageId}.${roundId}`;
+
+            // Daca in stage-ul curent, aceasta runda era singura
             if (Object.keys(state.items[contestId].stages[stageId]).length == 1)
-                db.collection('contests')
-                    .doc(contestId)
-                    .update({status: 'finished'});
+                updates['status'] = 'finished';
 
-            let updates = {};
-            updates[`stages.${stageId}.${roundId}.${playerName}.score`] =
-                'disqualified';
-
-            updates[`stages.${stageId}.${roundId}.stats.winner`] = opponentName;
+            updates[`${roundPath}.${playerName}.score`] = 'disqualified';
+            updates[`${roundPath}.stats.winner`] = opponentName;
 
             db.collection('contests')
                 .doc(contestId)
