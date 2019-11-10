@@ -5,16 +5,23 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "postinstall": "npm run build",
+        "start": "node server.js"
     },
     "dependencies": {
+        "@chenfengyuan/vue-qrcode": "^1.0.1",
         "bootstrap": "^4.3.1",
         "core-js": "^2.6.5",
+        "express": "^4.17.1",
         "firebase": "^7.1.0",
         "jquery": "^3.4.1",
         "popper.js": "^1.15.0",
+        "print-js": "^1.0.61",
+        "serve-static": "^1.14.1",
         "vue": "^2.6.10",
         "vue-firestore": "^0.3.22",
+        "vue-html-to-paper": "^1.1.1",
         "vue-router": "^3.0.3",
         "vuelidate": "^0.7.4",
         "vuex": "^3.0.1"

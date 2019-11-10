@@ -13,9 +13,9 @@
 
       <div class="col-lg-8">
         <ContestClassicBracket v-if="!isStarted" :contestId="id" />
+        <div v-else-if="!user">You can't view the bracket right now!s</div>
         <ContestClassicVotingStage v-else :contestId="id" :stageId="contest.currentStage" />
         <br />
-
         <button
           v-if="isOrganizer && !isStarted && !isFinished && !isPaused"
           class="btn btn-primary"
@@ -62,6 +62,11 @@ export default {
     id: {
       required: true,
       type: String
+    },
+
+    isAllowedJudge: {
+      required: true,
+      default: false
     }
   },
 
@@ -83,7 +88,7 @@ export default {
     }),
 
     isOrganizer() {
-      return this.user.role == "organizer";
+      return this.user && this.user.role == "organizer";
     },
 
     isStarted() {
@@ -91,7 +96,7 @@ export default {
     },
 
     isFinished() {
-      return this.contest.status == "finished";
+      return this.contest.status === "finished";
     },
 
     isPaused() {

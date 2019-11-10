@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-lg-12">
         <div class="card bg-secondary shadow border-0">
-          <div class="card-body px-lg-5 py-lg-5">
+          <div class="card-body py-lg-5">
             <label class="form-control-label">Disqualify Players from current Stage:</label>
             <ul v-for="(round, roundKey, roundIndex) in rounds" :key="roundIndex">
               <li
@@ -21,6 +21,15 @@
                 </span>
               </li>
             </ul>
+            <br />
+            <div>
+              <label class="form-control-label">Contest QR Code:</label>
+              <qrcode
+                value="`//localhost/:8080/contest/${contestID}?judge=true`"
+                :options="{ width: 200 }"
+              ></qrcode>
+              <button disabled>Print QR Code</button>
+            </div>
           </div>
         </div>
       </div>

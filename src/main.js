@@ -8,10 +8,38 @@ import '@firebase/firestore';
 
 import vuelidate from 'vuelidate';
 Vue.use(vuelidate);
+import VueQrcode from '@chenfengyuan/vue-qrcode';
 
+Vue.component(VueQrcode.name, VueQrcode);
+
+import VueHtmlToPaper from 'vue-html-to-paper';
+
+const options = {
+    name: '_blank',
+    specs: [
+        'fullscreen=yes',
+        'titlebar=yes',
+        'scrollbars=yes'
+    ],
+    styles: [
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+        'https://unpkg.com/kidlat-css/css/kidlat.css'
+    ]
+}
+
+Vue.use(VueHtmlToPaper, options);
 Vue.config.productionTip = false;
 
-const firebaseConfig = {};
+const firebaseConfig = {
+    apiKey: 'AIzaSyDAmj34_zsCRxdT1wlY133KH4cxvQbWc50',
+    authDomain: 'mps-rap-battles-app.firebaseapp.com',
+    databaseURL: 'https://mps-rap-battles-app.firebaseio.com',
+    projectId: 'mps-rap-battles-app',
+    storageBucket: 'mps-rap-battles-app.appspot.com',
+    messagingSenderId: '888577573869',
+    appId: '1:888577573869:web:7cfd4c4971d918fe169de4',
+    measurementId: 'G-8ZCKSBLPHR'
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

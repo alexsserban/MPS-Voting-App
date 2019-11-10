@@ -23,32 +23,32 @@ const router = new Router({
             path: '/contest/:id',
             name: 'Contest',
             component: Contest,
-            meta: {requiresAuth: true},
-            props: true
+            meta: { requiresNotJudge: true },
+            props: (route) => ({ isAllowedJudge: route.query.judge, id: route.params.id })
         },
 
         {
             path: '/register',
             name: 'Register',
             component: Register,
-            meta: {requiresGuest: true}
+            meta: { requiresGuest: true }
         },
 
         {
             path: '/signIn',
             name: 'SignIn',
             component: SignIn,
-            meta: {requiresGuest: true}
+            meta: { requiresGuest: true }
         },
 
         {
             path: '/logout',
             name: 'SignOut',
-            meta: {requiresAuth: true},
+            meta: { requiresAuth: true },
             beforeEnter(to, from, next) {
                 store
                     .dispatch('auth/signOut')
-                    .then(() => next({name: 'SignIn'}));
+                    .then(() => next({ name: 'SignIn' }));
             }
         }
     ]
@@ -62,14 +62,16 @@ router.beforeEach((to, from, next) => {
             if (user) {
                 next();
             } else {
-                next({name: 'SignIn', query: {redirectTo: to.path}});
+                next({ name: 'SignIn', query: { redirectTo: to.path } });
             }
         } else if (to.matched.some(route => route.meta.requiresGuest)) {
             if (!user) {
                 next();
             } else {
-                next({name: 'Home'});
+                next({ name: 'Home' });
             }
+        } else if (to.matched.some(route => route.meta.requiresNotJudge)) {
+            if (!user || user.role != "judge") next()
         } else {
             next();
         }

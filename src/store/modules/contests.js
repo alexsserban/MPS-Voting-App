@@ -1,4 +1,4 @@
-import {db, firestore} from '@/main';
+import { db, firestore } from '@/main';
 import {
     newStageFactory,
     InitialStageFactory,
@@ -12,10 +12,12 @@ export default {
         items: {}
     },
 
-    getters: {},
+    getters: {
+
+    },
 
     actions: {
-        fetchAllContests({commit}) {
+        fetchAllContests({ commit }) {
             console.log(`Fetching Contests: ALL`);
 
             return new Promise(async (resolve, reject) => {
@@ -28,14 +30,14 @@ export default {
                             id: contest.id,
                             item: contest.data()
                         },
-                        {root: true}
+                        { root: true }
                     );
                 });
                 resolve();
             });
         },
 
-        fetchContest({commit}, contestId) {
+        fetchContest({ commit }, contestId) {
             return new Promise(async (resolve, reject) => {
                 const contest = await db
                     .collection('contests')
@@ -49,17 +51,17 @@ export default {
                         id: contestId,
                         item: contest.data()
                     },
-                    {root: true}
+                    { root: true }
                 );
                 resolve();
             });
         },
 
-        createContest({commit, state, rootState}, {contest, players}) {
+        createContest({ commit, state, rootState }, { contest, players }) {
             return new Promise(async (resolve, reject) => {
                 contest = {
                     ...contest,
-                    userId: rootState.auth.authId,
+                    userId: rootState.users.items[rootState.auth.authId].email,
                     status: 'notStarted',
                     currentStage: 0,
                     stages: {
@@ -76,15 +78,15 @@ export default {
                         id: contestRef.id,
                         item: contest
                     },
-                    {root: true}
+                    { root: true }
                 );
                 resolve(state.items[contestRef.id]);
             });
         },
 
         async sendRoundRating(
-            {state, dispatch, rootState},
-            {contestId, stageId, roundId, players}
+            { state, dispatch, rootState },
+            { contestId, stageId, roundId, players }
         ) {
             await dispatch('fetchContest', contestId);
 
@@ -120,7 +122,7 @@ export default {
             await dispatch('fetchContest', contestId);
         },
 
-        async endStage({state, commit}, {contestId, stageId}) {
+        async endStage({ state, commit }, { contestId, stageId }) {
             const stage = state.items[contestId].stages[stageId],
                 benchmarks = state.items[contestId].benchmarks;
 
@@ -164,13 +166,19 @@ export default {
 
                 keys = Object.keys(score);
 
+                console.log(keys[0], score[keys[0]]);
+                console.log(keys[1], score[keys[1]]);
+
                 // Departajare prin scor
                 winner =
                     score[keys[0]] > score[keys[1]]
                         ? keys[0]
                         : score[keys[0]] < score[keys[1]]
-                        ? keys[0]
-                        : null;
+                            ? keys[1]
+                            : null;
+
+                console.log('winnner', winner);
+
 
                 // Departajare prin benchmarks
                 if (!winner)
@@ -182,8 +190,8 @@ export default {
                             firstBenchmark > secondBenchMark
                                 ? keys[0]
                                 : firstBenchmark < secondBenchMark
-                                ? keys[1]
-                                : null;
+                                    ? keys[1]
+                                    : null;
 
                         if (winner) break;
                     }
@@ -195,6 +203,7 @@ export default {
                     } else {
                         winner = keys[0];
                     }
+                console.log('winnner', winner);
 
                 updates[`stages.${stageId}.${roundKey}.stats.winner`] = winner;
                 newPlayers.push(winner);
@@ -203,7 +212,7 @@ export default {
             //Termina contestul daca a fost o singura runda in ultimul stage
             if (Object.keys(stage).length == 1) {
                 commit('endContest', contestId);
-                updates['status'] = ' finished';
+                updates['status'] = 'finished';
             } else {
                 const stage = newStageFactory(newPlayers, benchmarks);
 
@@ -225,8 +234,8 @@ export default {
         },
 
         disqualifyPlayer(
-            {commit, state},
-            {playerName, opponentName, contestId, stageId, roundId}
+            { commit, state },
+            { playerName, opponentName, contestId, stageId, roundId }
         ) {
             let updates = {},
                 roundPath = `stages.${stageId}.${roundId}`;
@@ -251,11 +260,11 @@ export default {
             });
         },
 
-        fetchContestRealTime({state, commit}, contestId) {
+        fetchContestRealTime({ state, commit }, contestId) {
             db.collection('contests')
                 .where('name', '==', state.items[contestId].name)
-                .onSnapshot(function(snapshot) {
-                    snapshot.docChanges().forEach(function(change) {
+                .onSnapshot(function (snapshot) {
+                    snapshot.docChanges().forEach(function (change) {
                         commit(
                             'setItem',
                             {
@@ -263,7 +272,7 @@ export default {
                                 id: contestId,
                                 item: change.doc.data()
                             },
-                            {root: true}
+                            { root: true }
                         );
                     });
                 });
@@ -277,7 +286,7 @@ export default {
 
         disqualify(
             state,
-            {playerName, opponentName, contestId, stageId, roundId}
+            { playerName, opponentName, contestId, stageId, roundId }
         ) {
             state.items[contestId].stages[stageId][roundId][playerName].score =
                 'disqualified';

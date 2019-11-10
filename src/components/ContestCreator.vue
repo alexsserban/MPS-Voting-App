@@ -47,7 +47,7 @@
             </div>
             <div class="row" style="margin-bottom: 20px;">
               <div class="col-lg-6" style="text-align: left;">
-                <label class="form-control-label">Add New Benchmark</label>
+                <label class="form-control-label">Add New Benchmark (in importance order)</label>
                 <input
                   type="text"
                   class="form-control form-control-alternative"
