@@ -23,7 +23,9 @@
                 />
               </div>
               <div style="text-align:left">
-                <label class="form-control-label" style="margin-right: 70px">Contest Type</label>
+                <label class="form-control-label" style="margin-right: 70px"
+                  >Contest Type</label
+                >
                 <label class="radio-inline">
                   <input
                     class="custom-radio"
@@ -47,7 +49,9 @@
             </div>
             <div class="row" style="margin-bottom: 20px;">
               <div class="col-lg-6" style="text-align: left;">
-                <label class="form-control-label">Add New Benchmark (in importance order)</label>
+                <label class="form-control-label"
+                  >Add New Benchmark (in importance order)</label
+                >
                 <input
                   type="text"
                   class="form-control form-control-alternative"
@@ -62,17 +66,19 @@
                   class="form-control-label"
                   style="margin-top:10px"
                   v-if="!contest.benchmarks.length"
-                >No benchmarks!</p>
+                >
+                  No benchmarks!
+                </p>
                 <ul>
                   <li
                     style="text-align:left"
-                    v-for="(benchmark,index) in contest.benchmarks"
+                    v-for="(benchmark, index) in contest.benchmarks"
                     :key="index"
                   >
                     {{ benchmark }}
                     <span class="btn-inner--icon">
                       <img
-                        @click.prevent="contest.benchmarks.splice(index,1);"
+                        @click.prevent="contest.benchmarks.splice(index, 1)"
                         width="12px"
                         src="../assets/cancel-icon.png"
                       />
@@ -83,7 +89,9 @@
             </div>
             <div class="row">
               <div class="col-lg-6" style="text-align: left;">
-                <label class="form-control-label">Add New Player (in seed order)</label>
+                <label class="form-control-label"
+                  >Add New Player (in seed order)</label
+                >
                 <input
                   type="text"
                   class="form-control form-control-alternative"
@@ -96,7 +104,9 @@
                   style="float:left"
                   @click.prevent="create()"
                   class="btn btn-primary my-4"
-                >Create Contest</button>
+                >
+                  Create Contest
+                </button>
               </div>
               <div class="col-lg-6">
                 <label class="form-control-label">Players</label>
@@ -104,13 +114,19 @@
                   class="form-control-label"
                   style="margin-top:10px"
                   v-if="!players.length"
-                >No players!</p>
+                >
+                  No players!
+                </p>
                 <ul>
-                  <li style="text-align:left" v-for="(player,index) in players" :key="index">
+                  <li
+                    style="text-align:left"
+                    v-for="(player, index) in players"
+                    :key="index"
+                  >
                     {{ player }}
                     <span class="btn-inner--icon">
                       <img
-                        @click.prevent="players.splice(index,1);"
+                        @click.prevent="players.splice(index, 1)"
                         width="12px"
                         src="../assets/cancel-icon.png"
                       />
@@ -176,7 +192,7 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .form-group {
   margin-top: 10px;
 }

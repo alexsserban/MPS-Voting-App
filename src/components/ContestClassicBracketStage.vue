@@ -1,7 +1,13 @@
 <template>
   <div>
-    <p>Stage {{stageId}}</p>
-    <ContestClassicBracketRound v-for="(round, roundId, roundIndex) in stage" :key="roundIndex" :contestId="contestId" :stageId="stageId" :roundId="roundId" />
+    <p>Stage {{ stageId }}</p>
+    <ContestClassicBracketRound
+      v-for="(round, roundId, roundIndex) in stage"
+      :key="roundIndex"
+      :contestId="contestId"
+      :stageId="stageId"
+      :roundId="roundId"
+    />
   </div>
 </template>
 
@@ -34,5 +40,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

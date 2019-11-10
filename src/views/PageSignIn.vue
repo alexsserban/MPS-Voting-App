@@ -24,7 +24,12 @@
             <form @submit.prevent="signIn" role="form">
               <div class="form-group mb-3">
                 <div class="input-group input-group-alternative">
-                  <input v-model="form.email" class="form-control" placeholder="Email" type="email" />
+                  <input
+                    v-model="form.email"
+                    class="form-control"
+                    placeholder="Email"
+                    type="email"
+                  />
                 </div>
               </div>
               <div class="form-group">
@@ -39,7 +44,9 @@
               </div>
 
               <div class="text-center">
-                <button type="submit" class="btn btn-primary my-4">Sign in</button>
+                <button type="submit" class="btn btn-primary my-4">
+                  Sign in
+                </button>
               </div>
             </form>
           </div>

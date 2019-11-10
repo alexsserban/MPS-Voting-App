@@ -1,26 +1,40 @@
 <template>
   <div>
     <div>
-      <button style="margin-left: .5rem" class="btn btn-primary">{{ firstPlayer.name }}</button>
+      <button style="margin-left: .5rem" class="btn btn-primary">
+        {{ firstPlayer.name }}
+      </button>
       <label class="form-control-label">vs</label>
-      <button
-        style="margin: 0 .5rem 0 .5rem; "
-        class="btn btn-primary my-4"
-      >{{ secondPlayer.name == null ? '-' : secondPlayer.name}}</button>
+      <button style="margin: 0 .5rem 0 .5rem; " class="btn btn-primary my-4">
+        {{ secondPlayer.name == null ? "-" : secondPlayer.name }}
+      </button>
     </div>
     <div v-if="!userAlreadyVoted">
       <label class="form-control-label">Select Benchmarks Ratings</label>
-      <div v-for="(benchmark, benchmarkKey, benchmarkIndex) in benchmarks" :key="benchmarkIndex">
+      <div
+        v-for="(benchmark, benchmarkKey, benchmarkIndex) in benchmarks"
+        :key="benchmarkIndex"
+      >
         <select v-model="firstPlayer.benchmarks[benchmark]">
           <option disabled value>Score</option>
-          <option v-for="(rating, ratingIndex) in ratingsList" :key="ratingIndex">{{rating}}</option>
+          <option
+            v-for="(rating, ratingIndex) in ratingsList"
+            :key="ratingIndex"
+            >{{ rating }}</option
+          >
         </select>
 
-        <button style="margin: 0 2rem 0 2rem; " class="btn btn-primary my-4">{{ benchmark }}</button>
+        <button style="margin: 0 2rem 0 2rem; " class="btn btn-primary my-4">
+          {{ benchmark }}
+        </button>
 
         <select v-model="secondPlayer.benchmarks[benchmark]">
           <option disabled value>Score</option>
-          <option v-for="(rating, ratingIndex) in ratingsList" :key="ratingIndex">{{rating}}</option>
+          <option
+            v-for="(rating, ratingIndex) in ratingsList"
+            :key="ratingIndex"
+            >{{ rating }}</option
+          >
         </select>
       </div>
       <button @click="send()" class="btn btn-primary my-4">Send Ratings</button>
@@ -127,5 +141,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -9,24 +9,36 @@
       <span v-else>is finished!</span>
     </h1>
     <div class="row">
-      <div :class="[isOrganizer && !isStarted && !isFinished ? 'col-lg-1' : 'col-lg-2']"></div>
+      <div
+        :class="[
+          isOrganizer && !isStarted && !isFinished ? 'col-lg-1' : 'col-lg-2'
+        ]"
+      ></div>
 
       <div class="col-lg-8">
         <ContestClassicBracket v-if="!isStarted" :contestId="id" />
         <div v-else-if="!user">You can't view the bracket right now!s</div>
-        <ContestClassicVotingStage v-else :contestId="id" :stageId="contest.currentStage" />
+        <ContestClassicVotingStage
+          v-else
+          :contestId="id"
+          :stageId="contest.currentStage"
+        />
         <br />
         <button
           v-if="isOrganizer && !isStarted && !isFinished && !isPaused"
           class="btn btn-primary"
           @click="start()"
-        >Start Contest</button>
+        >
+          Start Contest
+        </button>
 
         <button
           v-else-if="isOrganizer && isPaused && !isFinished"
           class="btn btn-primary"
           @click="start()"
-        >Start next Stage</button>
+        >
+          Start next Stage
+        </button>
 
         <br />
       </div>
@@ -34,7 +46,7 @@
         <RemovePlayer :contestId="id" :stageId="contest.currentStage" />
       </div>
 
-      <div :class="[isOrganizer? 'col-lg-1' : 'col-lg-2']"></div>
+      <div :class="[isOrganizer ? 'col-lg-1' : 'col-lg-2']"></div>
     </div>
   </div>
 </template>

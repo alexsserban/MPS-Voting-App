@@ -5,7 +5,12 @@
     <span v-if="!availableContest">No contests available!</span>
 
     <!-- Pentru fiecare contest din contestList randeaza componenta ContestPreview -->
-    <div v-else v-for="(contest,index) in contestsList" :key="index" class="text-center">
+    <div
+      v-else
+      v-for="(contest, index) in contestsList"
+      :key="index"
+      class="text-center"
+    >
       <ContestPreview :contest="contest" :id="index" />
     </div>
 

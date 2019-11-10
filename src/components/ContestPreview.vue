@@ -4,25 +4,29 @@
       <div class="col-lg-6 col-md-8">
         <div class="card bg-secondary shadow border-0">
           <div class="card-body px-lg-5 py-lg-5">
-            <router-link :to="{name: 'Contest', params: {id}}">
+            <router-link :to="{ name: 'Contest', params: { id } }">
               <button class="btn btn-primary my-4">{{ contest.name }}</button>
             </router-link>
             <div style="text-align:left">
               <p class="form-control-label">
                 Description:
-                <span class="db-elem">{{contest.description}}</span>
+                <span class="db-elem">{{ contest.description }}</span>
               </p>
               <p class="form-control-label">
                 Type:
-                <span class="db-elem">{{contest.type}}</span>
+                <span class="db-elem">{{ contest.type }}</span>
               </p>
               <p class="form-control-label">
                 Benchmarks:
                 <span
-                  v-for="(benchmark,index) in contest.benchmarks"
+                  v-for="(benchmark, index) in contest.benchmarks"
                   :key="index"
                   class="db-elem"
-                >{{ benchmark }}{{ (index != contest.benchmarks.length - 1) ? ', ' : ''}}</span>
+                  >{{ benchmark
+                  }}{{
+                    index != contest.benchmarks.length - 1 ? ", " : ""
+                  }}</span
+                >
                 <!-- {{contest.benchmarks[contest.benchmarks.length - 1]}} -->
               </p>
             </div>

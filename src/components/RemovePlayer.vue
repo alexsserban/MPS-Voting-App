@@ -4,14 +4,19 @@
       <div class="col-lg-12">
         <div class="card bg-secondary shadow border-0">
           <div class="card-body py-lg-5">
-            <label class="form-control-label">Disqualify Players from current Stage:</label>
-            <ul v-for="(round, roundKey, roundIndex) in rounds" :key="roundIndex">
+            <label class="form-control-label"
+              >Disqualify Players from current Stage:</label
+            >
+            <ul
+              v-for="(round, roundKey, roundIndex) in rounds"
+              :key="roundIndex"
+            >
               <li
                 style="text-align:left"
                 v-for="(player, playerKey, playerIndex) in updatedRound(round)"
                 :key="playerIndex"
               >
-                {{playerKey }}
+                {{ playerKey }}
                 <span class="btn-inner--icon">
                   <img
                     @click.prevent="removePlayer(playerKey, roundKey, round)"
@@ -102,5 +107,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

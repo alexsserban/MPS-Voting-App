@@ -8,7 +8,8 @@
               v-if="availableRoundsToVote"
               class="form-control-label"
               style="margin-right: 70px"
-            >No available Rounds to Rate</label>
+              >No available Rounds to Rate</label
+            >
             <div v-if="!isOrganizer">
               <ContestClassicVotingRound
                 v-for="(round, roundId, roundIndex) in filteredStage"
@@ -31,7 +32,9 @@
       style="margin: 0 2rem 0 2rem; "
       class="btn btn-primary my-4"
       @click="finishVotingRound()"
-    >Finish This Stage</button>
+    >
+      Finish This Stage
+    </button>
   </div>
 </template>
 
@@ -103,5 +106,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

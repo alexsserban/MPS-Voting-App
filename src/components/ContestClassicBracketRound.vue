@@ -5,21 +5,40 @@
       <button
         style="margin-left: .5rem"
         class="btn btn-primary"
-        v-bind:class="[isStarted ? firstPlayerWon ?  'win'  : isDisqualified(firstPlayer.name) ? 'disqualified' : 'lose' : '']"
-      >{{ firstPlayer.name}}</button>
+        v-bind:class="[
+          isStarted
+            ? firstPlayerWon
+              ? 'win'
+              : isDisqualified(firstPlayer.name)
+              ? 'disqualified'
+              : 'lose'
+            : ''
+        ]"
+      >
+        {{ firstPlayer.name }}
+      </button>
       <label class="form-control-label">vs</label>
       <button
         style="margin: 0 .5rem 0 .5rem; "
         class="btn btn-primary my-4"
-        v-bind:class="[isStarted ?  firstPlayerWon ?  isDisqualified(secondPlayer.name) ? 'disqualified' : 'lose' : 'win' : '']"
-      >{{ secondPlayer.name == 'undefined' ? '-' : secondPlayer.name}}</button>
-      <label class="form-control-label">{{ score(secondPlayer)}}</label>
+        v-bind:class="[
+          isStarted
+            ? firstPlayerWon
+              ? isDisqualified(secondPlayer.name)
+                ? 'disqualified'
+                : 'lose'
+              : 'win'
+            : ''
+        ]"
+      >
+        {{ secondPlayer.name == "undefined" ? "-" : secondPlayer.name }}
+      </button>
+      <label class="form-control-label">{{ score(secondPlayer) }}</label>
     </div>
     <div>
-      <div
-        v-for="(benchmark, key, index) in benchmarks"
-        :key="index"
-      >{{`${key}: ${benchmark} - ${round[secondPlayer.name][key]}`}}</div>
+      <div v-for="(benchmark, key, index) in benchmarks" :key="index">
+        {{ `${key}: ${benchmark} - ${round[secondPlayer.name][key]}` }}
+      </div>
       <br />
       <br />
     </div>

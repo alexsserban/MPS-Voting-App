@@ -73,11 +73,12 @@
                   />
                 </div>
                 <template v-if="$v.form.email.$error">
-                  <p v-if="!$v.form.email.required" class="form-error">This field is required.</p>
-                  <p
-                    v-else-if="!$v.form.email.email"
-                    class="form-error"
-                  >This is not a valid email address.</p>
+                  <p v-if="!$v.form.email.required" class="form-error">
+                    This field is required.
+                  </p>
+                  <p v-else-if="!$v.form.email.email" class="form-error">
+                    This is not a valid email address.
+                  </p>
                 </template>
               </div>
               <div class="form-group">
@@ -91,15 +92,18 @@
                   />
                 </div>
                 <template v-if="$v.form.password.$error">
-                  <p v-if="!$v.form.password.required" class="form-error">This field is required.</p>
-                  <p
-                    v-if="!$v.form.password.minLength"
-                    class="form-error"
-                  >The password should be atleast 6 characters long.</p>
+                  <p v-if="!$v.form.password.required" class="form-error">
+                    This field is required.
+                  </p>
+                  <p v-if="!$v.form.password.minLength" class="form-error">
+                    The password should be atleast 6 characters long.
+                  </p>
                 </template>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                <button type="submit" class="btn btn-primary mt-4">
+                  Create account
+                </button>
               </div>
             </form>
           </div>
