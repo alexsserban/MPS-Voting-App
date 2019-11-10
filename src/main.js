@@ -11,23 +11,6 @@ Vue.use(vuelidate);
 import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 Vue.component(VueQrcode.name, VueQrcode);
-
-import VueHtmlToPaper from 'vue-html-to-paper';
-
-const options = {
-    name: '_blank',
-    specs: [
-        'fullscreen=yes',
-        'titlebar=yes',
-        'scrollbars=yes'
-    ],
-    styles: [
-        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
-        'https://unpkg.com/kidlat-css/css/kidlat.css'
-    ]
-}
-
-Vue.use(VueHtmlToPaper, options);
 Vue.config.productionTip = false;
 
 const firebaseConfig = {
