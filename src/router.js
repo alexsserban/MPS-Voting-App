@@ -23,7 +23,6 @@ const router = new Router({
       path: "/contest/:id",
       name: "Contest",
       component: Contest,
-      meta: { requiresNotJudge: true },
       props: route => ({
         isAllowedJudge: route.query.judge,
         id: route.params.id
@@ -71,8 +70,6 @@ router.beforeEach((to, from, next) => {
       } else {
         next({ name: "Home" });
       }
-    } else if (to.matched.some(route => route.meta.requiresNotJudge)) {
-      if (!user || user.role != "judge") next();
     } else {
       next();
     }
