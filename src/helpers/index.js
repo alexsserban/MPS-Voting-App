@@ -2,8 +2,8 @@ const isEven = number => number % 2 == 0;
 
 const makeNewRound = (firstPlayerName, secondPlayerName, benchmarks) => {
     let round = {
-        [firstPlayerName]: {score: 0,},
-        [secondPlayerName]: {score: 0,},
+        [firstPlayerName]: {score: 0},
+        [secondPlayerName]: {score: 0},
         stats: {
             nrRatings: 0,
             users: [],
