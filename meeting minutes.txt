@@ -1,0 +1,20 @@
+06/11/2019 - Status update
+
+AlexS: did code clean-up, will solve known bugs, implement "show points after each round", QR login|=> DL 09.11.2019
+      add text for "add benchmarks in order of priority"					   |
+Nicu: will do new type of contest								   |
+Larisa: will do testing after, testing report
+AlexU: worked on SSD, meeting points
+
+
+next meeting scheduled on 09.11.2019 19:00
+
+
+
+
+10/11/2019 - Final meeting
+
+AlexS: did qr login, added text, cleaned up code, waits for Nicu's part for deployment
+AlexU: worked on SSD, needs deployment to take pictures for the document
+Larisa: started testing, will do testing report after
+Nicu: unable to join
